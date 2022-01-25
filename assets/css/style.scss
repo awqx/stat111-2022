@@ -14,6 +14,7 @@
 	--darkgray: #2a2a2a;
 	--white: #ffffff;
 	--cyan: #51bce0; 
+	--stat111blue: #0182ce; 
 }
 
 /* Import fonts */
@@ -66,11 +67,11 @@ body, strong {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: var(--gold);
+  color: var(--stat111blue);
   font-family: Roboto Mono, Consolas, monospace; 
   weight: normal; 
 }
 
-a, a:hover {
-  color: var(--lightpurple); 
+a, a:hover, a:visited {
+  color: var(--stat111blue); 
 }
