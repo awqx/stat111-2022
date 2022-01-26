@@ -15,6 +15,7 @@
 	--white: #ffffff;
 	--cyan: #51bce0; 
 	--stat111blue: #0182ce; 
+	--stat111lightblue: #8bd4ff; 
 }
 
 /* Import fonts */
@@ -31,14 +32,6 @@
     font-weight: normal;
     font-style: normal;
 }
-
-@font-face {
-    font-family: 'Rubik Light';
-    src: url("../Rubik-Light.ttf") format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
 
 @font-face {
     font-family: 'Roboto Mono';
@@ -73,5 +66,5 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a, a:hover, a:visited {
-  color: var(--stat111blue); 
+  color: var(--stat111lightblue); 
 }
