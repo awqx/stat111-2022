@@ -1,0 +1,68 @@
+---
+title: "0. Homework 1 Advice"
+author: "Al Xin"
+date: "1/26/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Tips for HW 01
+
+- Testing how many components of a vector fulfill a condition
+
+```{r}
+set.seed(111)
+x <- rnorm(2022)
+sum(x > 0)
+mean(x > 0)
+```
+
+- Another example of element-wise vector functions
+
+```{r}
+rnorm(10, c(-100, 100))
+qnorm(c(0.25, 0.5, 0.75))
+```
+
+- Loading data
+
+```{r}
+jesse <- read.csv("data/jesse.csv")
+```
+
+- Indexing data
+
+```{r}
+x_ind <- jesse$middle.school < 100 & jesse$middle.school > 80
+new_jesse <- jesse[x_ind, ]
+```
+
+- Notation of 2(a)
+- 2(a)
+
+```{r}
+ms <- jesse$middle.school
+hs <- jesse$high.school
+sum(ms - hs)
+x <- 124
+
+q2a <- function(x) {
+  sum((ms - hs)[ms > x - 10 & ms < x + 10]) / sum(ms > x - 10 & ms < x + 10) 
+}
+
+steps <- seq(64, 124, 0.001)
+q2a(64)
+
+q2a_df <- data.frame(
+ x = steps, 
+ y = sapply(steps, q2a)
+)
+
+ggplot(q2a_df, aes(x = x, y = y)) + 
+ geom_line() + 
+ theme_bw()
+```
+

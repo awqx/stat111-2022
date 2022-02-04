@@ -1,0 +1,82 @@
+---
+title: "Homework 1 Office Hours"
+author: "Al Xin"
+date: "2/2/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(dplyr)
+library(ggplot2)
+```
+
+## Problem 3
+
+### 3e
+
+```{r}
+# Replace the following with the correct functions
+epsilon <- function(x) {
+ return(x[1])
+}
+
+eta <- function(x) {
+ return(x[1])
+}
+
+# The variable you can change is the number of Cauchys generated
+experiment <- function(n){
+ x <- rcauchy(n)
+ c(epsilon(x), eta(x))
+}
+
+B <- 10000
+reps_10 <- replicate(B, experiment(10))
+reps_100 <- replicate(B, experiment(100))
+reps_1000 <- replicate(B, experiment(1000))
+reps_10000 <- replicate(B, experiment(10000))
+```
+```{r}
+# repeat this for each of reps_n
+eps_10_q <- quantile(reps_10[1, ], c(0.05, 0.5, 0.95))
+
+# repeat this for each of reps_n
+eta_10_q <- quantile(reps_10[2, ], c(0.05, 0.5, 0.95))
+```
+
+```{r}
+# The more efficient way 
+library(tictoc)
+tic()
+reps <- lapply(
+ 10 ^ (c(1:4)), 
+ function(x) {
+  replicate(B, experiment(x))
+ }
+)
+toc()
+
+eps_eta <- lapply(
+ reps, 
+ function(x) {
+  c(quantile(x[1, ], c(0.05, 0.5, 0.95)), 
+  quantile(x[2, ], c(0.05, 0.5, 0.95)))
+ }
+)
+
+do.call(rbind, eps_eta)
+```
+
+
+# Problem 2
+
+### 2(a)
+
+```{r}
+# create a sequence
+seq(0, 10, 0.05)
+
+```
+
+
+

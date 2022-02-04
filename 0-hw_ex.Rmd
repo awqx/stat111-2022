@@ -1,0 +1,27 @@
+---
+title: "Problem Set 1 Help"
+author: "Al Xin"
+date: "1/28/2022"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+This is an example of text. 
+
+# Heading 1
+
+## Heading 2
+
+### Heading 3
+
+Heading and other formatting is standard markdown. 
+
+```{r}
+x <- 44567
+y <- 9213
+x + y
+```
+
+
+

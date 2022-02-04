@@ -185,9 +185,13 @@ If you look at the `.Rmd` source here, you'll see a good example of how to forma
 
 ```{r}
 set.seed(111)
-temp <- rnorm(12348)
-1 / (length(temp) - 1) * sum((temp - mean(temp))^2)
-var(temp)
+x <- rnorm(11234)
+1/(length(x) - 1) * sum((x - mean(x))^2)
+var(x)
+cat(
+  "Our function:", 1/(length(x) - 1) * sum((x - mean(x))^2), "\n", 
+  "Built-in var():", var(x)
+)
 ```
 
 ### 1.7 Packages
@@ -207,11 +211,29 @@ R has built-in functions for working with many probability distributions covered
 
 The prefixes `d`, `p`, `q`, and `r` and the first arguments are consistent between probability distributions. However, different distributions require additional arguments to be specified. For example, to generate 10 i.i.d. observations with distribution `\text{Bin}(n, p)`, we would use the function call `rbinom(10, size = n, prob = p)`.
 
+```{r}
+# What are the outputs for each of these?
+dnorm(0)
+pnorm(0)
+qnorm(0)
+rnorm(10)
+```
+
 ### 2.1 Exercise 2: Law of large numbers
 
 Recall that the Law of Large Numbers (LLN) states that the sample mean of i.i.d. observations approaches the expected value as the sample size increases. 
 
 *Choose a distribution and generate samples of various sizes to observe the LLN.*
+
+```{r}
+x <- lapply(
+  c(10 * c(1:10), 1000, 10000, 100000), 
+  rexp, 
+  rate = 1
+)
+
+y <- lapply(x, mean)
+```
 
 ## 3. Tabular data
 
@@ -284,7 +306,6 @@ Y
 ```
 
 Structurally, data frames are lists of vectors, where each vector corresponds to a column. So, while a data frame can contain many data types, each column corresponds to only one data type. 
-
 We can access the columns of a data frame by name using the dollar sign, double brackets, or single brackets. Rows can also be retrieved and modified with similar operations.
 
 By supplying elements to a new index, you can also add elements to the data frame.
@@ -378,12 +399,10 @@ my_vector %% 17
 
 The function `replicate` repeatedly evaluates an expression. This is useful for simulations. For example, if our experiment was to observe 10 i.i.d. r.v.s with an Exponential distribution with $\lambda = 1$, we can replicate the experiment 100 times using the following:
 
-```{r replicate_ex}
+```{r replicate_ex, eval=F}
+# run the code to see how simplify changes the result
 result <- replicate(100, rexp(10, 1), simplify = F)
-result
-
 result <- replicate(100, rexp(10, 1), simplify = T)
-result
 ```
 
 ### 4.4 Exercise 4: Central Limit Theorem (CLT)
@@ -398,10 +417,10 @@ Hint: Define a separate vector to store the means.
 
 ```{r}
 trial <- function() {
- x <- rexp(5, 1)
+ x <- rexp(50, 1)
  mean(x)
 }
-result <- replicate(1000, trial())
+result <- replicate(500, trial())
 hist(result)
 ```
 
@@ -481,7 +500,6 @@ x <- seq(0, 7, by = 0.01)
 expo_pdf <- dexp(x, 1)
 expo_df <- data.frame(x, expo_pdf)
 
-
 ggplot(data = expo_samp_df, aes(x = expo_samp)) + 
   # An ordinary histogram would not have the additional aes() arg
   geom_histogram(aes(y = ..density..)) + 
@@ -501,16 +519,16 @@ plot(
  response, 
  xlab = "Predictor", 
  ylab = "Response"
-)
+) + 
 # Add calculated linear regression line
-abline(lm(response ~ predictor), col = "blue")
+abline(lm(response ~ predictor), col = "blue") + 
 # Add true regression line
 abline(10, 2, col = "red")
 
 # Make a histogram with the same data
 # To make a normal histogram, set freq = T
-hist(expo_samp, freq = F)
-curve(dexp(x, 1), col = "blue", add = T) 
+hist(expo_samp, freq = F) + 
+curve(dexp(x, 1), col = "red", add = T) 
 ```
 
 \newpage 
