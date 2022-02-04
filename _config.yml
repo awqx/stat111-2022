@@ -23,7 +23,7 @@ email: axin@college.harvard.edu
 description: >- # this means to ignore newlines until "baseurl:"
   Resources for students in STAT111 (Spring 2022). Managed by aL Xin.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+url: "/stat111-2022" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: al_xin
 github_username:  awqx
 logo: img/stat111-logo.png
